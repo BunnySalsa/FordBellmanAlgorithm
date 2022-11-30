@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.rsreu.structure.Graph;
 
-public class AppTest {
+public class MainTest {
     private static final int INF = Integer.MAX_VALUE;
 
     @Test

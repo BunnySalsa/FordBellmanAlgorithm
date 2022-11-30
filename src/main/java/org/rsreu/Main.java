@@ -5,7 +5,7 @@ import org.rsreu.structure.Graph;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class App {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);//Создание объекта scanner класса Scanner, который отвечает за чтение данных с консоли
         System.out.println("Insert vertex count");//Вывод сообщения о вводе количества вершин
