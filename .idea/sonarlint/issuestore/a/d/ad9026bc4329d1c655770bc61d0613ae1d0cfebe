@@ -1,4 +1,6 @@
 
-`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ºÂóıÿÿÿÿ
-m
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(ºÂóıÿÿÿÿ
+[	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(¬ÖÁ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(¬ÖÁ
+W
+java:S18546":Remove this useless assignment to local variable "result".(ÈœÎ‹8ÈŒ¤¯Ê0

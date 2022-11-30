@@ -11,7 +11,7 @@ public class AppTest {
     public void shouldGetCorrectWays() {
         Graph graph;
         FordBellman alg = new FordBellman();
-        int[][] adjMatrix = new int[][]{
+        Integer[][] adjMatrix = new Integer[][]{
                 {INF, 5, INF, 1, INF},
                 {INF, INF, 7, INF, 1},
                 {INF, INF, INF, INF, 42},
@@ -19,13 +19,13 @@ public class AppTest {
                 {INF, INF, INF, INF, INF}
         };
         graph = new Graph(adjMatrix);
-        int[] expected = new int[]{0, 5, 4, 1, 6};
-        int[] result = alg.run(graph, 0);
+        Integer[] expected = new Integer[]{0, 5, 4, 1, 6};
+        Integer[] result = alg.run(graph, 0);
         for (int i = 0; i < expected.length; i++) {
             Assert.assertEquals(expected[i], result[i]);
         }
 
-        adjMatrix = new int[][]{
+        adjMatrix = new Integer[][]{
                 {INF, 1, INF, INF, 3},
                 {INF, INF, 3, 3, -5},
                 {INF, INF, INF, 1, -5},
@@ -40,7 +40,7 @@ public class AppTest {
             Assert.assertTrue(true);
         }
 
-        adjMatrix = new int[][]{
+        adjMatrix = new Integer[][]{
                 {INF, 1, INF, INF, 3},
                 {INF, INF, 3, 3, 8},
                 {INF, INF, INF, 1, -5},
@@ -48,13 +48,13 @@ public class AppTest {
                 {INF, 8, INF, 4, INF}
         };
         graph = new Graph(adjMatrix);
-        expected = new int[]{0, 1, 4, 3, -1};
+        expected = new Integer[]{0, 1, 4, 3, -1};
         result = alg.run(graph, 0);
         for (int i = 0; i < expected.length; i++) {
             Assert.assertEquals(expected[i], result[i]);
         }
 
-        adjMatrix = new int[][]{
+        adjMatrix = new Integer[][]{
                 {INF, -3, INF, INF, 2, INF, INF, INF, INF},
                 {INF, INF, -5, 15, 12, INF, INF, INF, INF},
                 {INF, INF, INF, 8, INF, INF, INF, 24, INF},
@@ -66,10 +66,30 @@ public class AppTest {
                 {INF, INF, INF, 11, INF, -13, INF, INF, INF},
         };
         graph = new Graph(adjMatrix);
-        expected = new int[]{0, -3, -11, -5, 2, -7, -1, 13, 6};
+        expected = new Integer[]{0, -3, -11, -5, 2, -7, -1, 13, 6};
         result = alg.run(graph, 0);
         for (int i = 0; i < expected.length; i++) {
             Assert.assertEquals(expected[i], result[i]);
         }
     }
+
+    @Test
+    public void testGetCorrectWays() {
+        Graph graph;
+        FordBellman alg = new FordBellman();
+        Integer[][] adjMatrix = new Integer[][]{
+                {INF, 5, INF, 1, INF},
+                {INF, INF, 7, INF, 1},
+                {INF, INF, INF, INF, 0},
+                {INF, INF, 3, INF, INF},
+                {INF, INF, INF, INF, INF}
+        };
+        graph = new Graph(adjMatrix);
+        Integer[] expected = new Integer[]{0, 5, 4, 1, 4};
+        Integer[] result = alg.run(graph, 0);
+        for (int i = 0; i < expected.length; i++) {
+            Assert.assertEquals(expected[i], result[i]);
+        }
+    }
+
 }
