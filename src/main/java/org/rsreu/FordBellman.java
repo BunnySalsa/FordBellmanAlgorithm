@@ -16,28 +16,28 @@ public class FordBellman {
         Integer[][] adjList = graph.getAdjList();//Локальная переменная. Присвоение списка смежности
         int k = 0;//Порядок итерации
         Integer[] s;//Массив переменной S
-        Integer[][] shortestWays = new Integer[vertCount][];//Матрица кратчайших путей
-        shortestWays[k] = new Integer[vertCount];//Первая строка матрицы кратчайших путей
+        Integer[] previusWays = new Integer[vertCount];//Массив пердыдущих значений кратчайших путей
+        Integer[] shortestWays = new Integer[vertCount];//Массив кратчайших путей
         for (int i = 0; i < vertCount; i++) {//Заполнение путей бесконечностями
-            shortestWays[k][i] = INFINITY;
+            previusWays[i] = INFINITY;
         }
-        shortestWays[k][start] = 0;//Установка кратчайшего пути для начальной точки
+        previusWays[start] = 0;//Установка кратчайшего пути для начальной точки
         for (int i = 0; i < adjList[start].length; i++) {//Нулевая итерация. Установка первых кратчайших путей из начальной вершины
-            shortestWays[k][adjList[start][i]] = graph.getWeight(start, adjList[0][i]);
+            previusWays[adjList[start][i]] = graph.getWeight(start, adjList[0][i]);
         }
         s = adjList[start];//формирование множества S
         while (k < vertCount - 1) {//Пока кол-во итераций меньше кол-ва вершин
-            shortestWays[k + 1] = shortestWays[k].clone();//Новая строка - копия предыдущей
+            shortestWays = previusWays.clone();//Новая строка - копия предыдущей
             for (int i = 0; i < s.length; i++) {//Для каждой вершины в множестве S
                 Integer[] gs = adjList[s[i]]; //формирование множества Г(S)
                 for (int j = 0; j < gs.length; j++) {//Для каждой дуги, ведущей в вершину множества Г(S)
-                    shortestWays[k + 1][gs[j]] = Integer.min(shortestWays[k + 1][gs[j]],
-                            shortestWays[k + 1][s[i]] + graph.getWeight(s[i], gs[j]));//Присвоение пометки
+                    shortestWays[gs[j]] = Integer.min(shortestWays[gs[j]],
+                            shortestWays[s[i]] + graph.getWeight(s[i], gs[j]));//Присвоение пометки
                 }
             }
             int countOfMatch = 0;//Проверка условия окончания
             for (int i = 0; i < vertCount; i++) {//Подсчет пометок, значение которых после итерации не изменилось
-                if(shortestWays[k][i].equals(shortestWays[k + 1][i])) countOfMatch++;
+                if(previusWays[i].equals(shortestWays[i])) countOfMatch++;
             }
             if (k <= vertCount - 1 && countOfMatch == vertCount) {
                 break;//Получен оптимальный результат
@@ -50,12 +50,13 @@ public class FordBellman {
                 newS.addAll(Arrays.stream(adjList[s[i]]).distinct().collect(Collectors.toList()));//К списку S прибавляется строка списка смежности, затем список удаляет все повторяющиеся элементы
             }
             for (int i = 0; i < vertCount; i++) {//Удаление вершин из множества S, пометки которых после итерации не изменились
-                if(shortestWays[k][i].equals(shortestWays[k + 1][i])) newS.remove(Integer.valueOf(i));//Если пометка не изменилась с прошлой итерации, то она удаляется из нового формируемого множества S
+                if(previusWays[i].equals(shortestWays[i])) newS.remove(Integer.valueOf(i));//Если пометка не изменилась с прошлой итерации, то она удаляется из нового формируемого множества S
             }
             s = newS.toArray(new Integer[0]);//Приведение списка к виду массива
             k++;//Инкремент
+            previusWays = shortestWays.clone();//Сохранение результатов итерации в массив предыдущих значений кратчайших путей
         }
-        return shortestWays[k].clone();
+        return shortestWays.clone();
     }
 
 }
