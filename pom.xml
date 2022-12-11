@@ -90,7 +90,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>org.rsreu.Main</mainClass>
+              <mainClass>org.rsreu.App</mainClass>
             </manifest>
           </archive>
         </configuration>
